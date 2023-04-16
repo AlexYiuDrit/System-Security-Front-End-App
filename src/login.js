@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useAuth } from './auth';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './login.css';
 import sha256 from 'js-sha256';
@@ -11,13 +13,14 @@ const LoginPage = ({ onLoginSuccess }) => {
     const [stage, setStage] = useState(1); // Stage 1 for email input, Stage 2 for password input
     const [emailError, setEmailError] = useState(null); // State to store email validation error message
     const [passwordError, setPasswordError] = useState(null);
-    const [hashedPassword, setHashedPassword] = useState(''); // State to store hashed password
     const [salt, setSalt] = useState('');
+    const [user, setUser] = useState('');
+    const auth = useAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (salt !== '') {
-          // Do something with the salt value, such as generating a hashed password
-          handleGenerateHash(salt);
+            console.log("useEffect...");
         }
     }, [salt]);
 
@@ -29,9 +32,12 @@ const LoginPage = ({ onLoginSuccess }) => {
         setPassword(e.target.value);
     };
 
-    const handleGenerateHash = (salt) => {
-        const hashed = sha256(salt + password);
-        setHashedPassword(hashed);
+    const handleLogin = async () => {
+        console.log(user);
+        auth.login(user);
+        onLoginSuccess();
+        localStorage.setItem('isLoggedIn', true); // Store the isLoggedIn state in localStorage
+        navigate('/authenticatedPage'); // Navigate to /authenticatedPage after successful login
     };
 
     const handleNext = async () => {
@@ -45,11 +51,12 @@ const LoginPage = ({ onLoginSuccess }) => {
 
             // Make axios call to server to check if email is valid
             try {
-                // Replace the endpoint with your server's API endpoint for email validation
                 let response = await axios.post(`${serverUrl}/login/checkEmail`, { email });
+                // let response = { status: 200, data: { status: 'ok', data: { salt: '012', userName: 'Alex' } } };
                 if (response.status === 200 && response.data.status === 'ok') {
                     // If email is valid, move to stage 2
-                    setSalt(response.data.salt);
+                    setSalt(response.data.data.salt);
+                    setUser(response.data.data.userName);
                     setEmailError(null); // Reset email validation error message
                     setStage(2);
                 } else {
@@ -60,13 +67,14 @@ const LoginPage = ({ onLoginSuccess }) => {
             }
         } else if (stage === 2) {
             try {
-                // Replace the endpoint with your server's API endpoint for password validation
                 let pwd = sha256(salt + password);
-                let response = await axios.post(`${serverUrl}/login/checkPassword`, { password: pwd });
+                let response = await axios.post(`${serverUrl}/login/checkPassword`, { email , password: pwd });
+                // let response = { status: 200, data: { status: 'ok', data: { salt: '012', userName: 'Alex' } } };
                 console.log(response);
                 if (response.status === 200 && response.data.status === 'ok') {
                     setPasswordError(null);
-                    onLoginSuccess();
+                    handleLogin();
+                    // onLoginSuccess();
                 } else {
                     setPasswordError(response.data.error);
                 }
