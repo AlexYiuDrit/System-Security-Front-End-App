@@ -51,8 +51,8 @@ const LoginPage = ({ onLoginSuccess }) => {
 
             // Make axios call to server to check if email is valid
             try {
-                let response = await axios.post(`${serverUrl}/login/checkEmail`, { email });
-                // let response = { status: 200, data: { status: 'ok', data: { salt: '012', userName: 'Alex' } } };
+                // let response = await axios.post(`${serverUrl}/login/checkEmail`, { email });
+                let response = { status: 200, data: { status: 'ok', data: { salt: '012', userName: 'Alex' } } };
                 if (response.status === 200 && response.data.status === 'ok') {
                     // If email is valid, move to stage 2
                     setSalt(response.data.data.salt);
@@ -68,8 +68,8 @@ const LoginPage = ({ onLoginSuccess }) => {
         } else if (stage === 2) {
             try {
                 let pwd = sha256(salt + password);
-                let response = await axios.post(`${serverUrl}/login/checkPassword`, { email , password: pwd });
-                // let response = { status: 200, data: { status: 'ok', data: { salt: '012', userName: 'Alex' } } };
+                // let response = await axios.post(`${serverUrl}/login/checkPassword`, { email , password: pwd });
+                let response = { status: 200, data: { status: 'ok', data: { salt: '012', userName: 'Alex' } } };
                 console.log(response);
                 if (response.status === 200 && response.data.status === 'ok') {
                     setPasswordError(null);
