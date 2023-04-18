@@ -7,6 +7,10 @@ const AuthenticatedPage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [groupName, setGroupName] = useState('');
     const [members, setMembers] = useState([]);
+    const [error, setError] = useState('');
+
+    const userData = JSON.parse(sessionStorage.getItem('userData'));
+    // console.log(userData.data);
 
     const handleLogout = () => {
         localStorage.clear();
@@ -16,17 +20,26 @@ const AuthenticatedPage = () => {
 
     const handleNewChat = () => {
         setIsModalOpen(true);
+        setError('');
     };
 
     const handleCreateGroup = () => {
+        if (!groupName || members.length === 0) {
+            setError('Missing group name or member not selected');
+            return;
+        }
         // Send request to server to create new group with groupName and members
         setIsModalOpen(false);
+        setGroupName('');
+        setMembers([]);
+        setError('');
     };
 
     const handleCancel = () => {
         setGroupName('');
         setMembers([]);
         setIsModalOpen(false);
+        setError('');
     };
 
     const handleGroupNameChange = (event) => {
@@ -53,8 +66,7 @@ const AuthenticatedPage = () => {
                 <button className="button" onClick={handleLogout}>Logout</button>
             </div>
             <div className="content">
-                <h1>You are authenticated!</h1>
-                {/* Add any other content or components for the authenticated page */}
+
             </div>
             {isModalOpen && (
                 <div className="modal">
@@ -85,6 +97,7 @@ const AuthenticatedPage = () => {
                                     </div>
                                 ))}
                             </div>
+                            <div className="error">{error}</div>
                         </div>
                         <div className="modal-footer">
                             <button className="cancel-button" onClick={handleCancel}>Cancel</button>
@@ -95,6 +108,7 @@ const AuthenticatedPage = () => {
             )}
         </div>
     );
-};
+    
+}
 
 export default AuthenticatedPage;
