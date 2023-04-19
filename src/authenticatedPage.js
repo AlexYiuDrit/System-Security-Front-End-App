@@ -10,7 +10,6 @@ const AuthenticatedPage = () => {
     const [error, setError] = useState('');
 
     const userData = JSON.parse(sessionStorage.getItem('userData'));
-    // console.log(userData.data);
 
     const handleLogout = () => {
         localStorage.clear();
@@ -29,9 +28,12 @@ const AuthenticatedPage = () => {
             return;
         }
         // Send request to server to create new group with groupName and members
+        
+
         setIsModalOpen(false);
         setGroupName('');
         setMembers([]);
+        console.log(members);
         setError('');
     };
 
@@ -47,12 +49,17 @@ const AuthenticatedPage = () => {
     };
 
     const handleMemberChange = (event) => {
-        const selectedMember = event.target.value;
-        if (!members.includes(selectedMember)) {
+        const selectedMemberId = event.target.value;
+        const selectedMemberName = event.target.options[event.target.selectedIndex].text;
+        let selectedMember = {
+            id: selectedMemberId,
+            name: selectedMemberName
+        };
+        if (!members.includes(selectedMemberId)) {
             setMembers([...members, selectedMember]);
         }
     };
-
+    
     const handleRemoveMember = (member) => {
         const newMembers = members.filter(m => m !== member);
         setMembers(newMembers);
@@ -66,7 +73,12 @@ const AuthenticatedPage = () => {
                 <button className="button" onClick={handleLogout}>Logout</button>
             </div>
             <div className="content">
-
+                <div className="groups">
+        
+                </div>
+                <div className="chat">
+                    {/* Add code for displaying chat messages here */}
+                </div>
             </div>
             {isModalOpen && (
                 <div className="modal">
@@ -83,16 +95,15 @@ const AuthenticatedPage = () => {
                             <div className="form-group">
                                 <label htmlFor="members">Members:</label>
                                 <select id="members" multiple onChange={handleMemberChange}>
-                                    <option value="member1">Member 1</option>
-                                    <option value="member2">Member 2</option>
-                                    <option value="member3">Member 3</option>
-                                    <option value="member4">Member 4</option>
+                                    {userData.data.contacts.map((contact) => (
+                                        <option value={contact.userId} key={contact.userId}>{contact.userName}</option>
+                                    ))}
                                 </select>
                             </div>
                             <div className="selected-members">
                                 {members.map((member) => (
-                                    <div className="selected-member" key={member}>
-                                        {member}
+                                    <div className="selected-member" key={member.id}>
+                                        {member.name}
                                         <button className="remove-member-button" onClick={() => handleRemoveMember(member)}>X</button>
                                     </div>
                                 ))}
@@ -108,6 +119,7 @@ const AuthenticatedPage = () => {
             )}
         </div>
     );
+
     
 }
 

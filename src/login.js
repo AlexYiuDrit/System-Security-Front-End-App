@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './login.css';
 import sha256 from 'js-sha256';
+const fs = require('fs');
+const func = require('../function.js');
 
 const serverUrl = 'http://localhost:4000';
 
@@ -38,13 +40,36 @@ const LoginPage = ({ onLoginSuccess }) => {
         onLoginSuccess();
         localStorage.setItem('isLoggedIn', true); // Store the isLoggedIn state in localStorage
         try {
-            const response = await axios.get(`${serverUrl}/chat/getUser?email=${email}`);
+            let response = await axios.get(`${serverUrl}/login/getUserData?email=${email}`);
+            let userGroups = handleSymmetricKeys(response.data.data.userName, response.data.data.groups);
+            response.data.data.groups = userGroups;
+            await response.save();
             sessionStorage.setItem('userData', JSON.stringify(response.data));
         } catch (error) {
             console.error('Error fetching user data:', error);
         }
         navigate('/authenticatedPage'); // Navigate to /authenticatedPage after successful login
     };
+
+    const handleSymmetricKeys = async (userName, groups) => {
+        try {
+            let { userPrivateKey } = require(`../Keypairs/${userName}.js`);
+            let userKeyPair = require(`../Keypairs/${userName}.js`);
+            for (let i = 0; i < groups.length; i++) {
+                if (!groups[i].handled) {
+                    let symmetricKey = func.privateKeyDecrypt(groups[i].SymmetricKey, userPrivateKey);
+                    // userSymmetricKeys.push({ groupId: groups[i].groupid, AES: symmetricKey });
+                    userKeyPair.userSymmetricKeys.push({ groupId: groups[i].groupid, AES: symmetricKey });
+                    groups[i].handled = true;
+                }
+            }
+            const keyPairFilePath = path.join(__dirname, `../Keypairs/${userName}.js`);
+            fs.writeFileSync(keyPairFilePath, `module.exports = ${JSON.stringify(userKeyPair, null, 2)};`);
+            return groups;
+        } catch (error) {
+            console.error('handling key error:', error);
+        }
+    }
 
     const handleNext = async () => {
         if (stage === 1) {
