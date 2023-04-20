@@ -1,46 +1,18 @@
 const publicKey = 
-`-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3jISsYNBHSncgZt/5aom
-ZBJg6IKizFITe4FIR1keYIJCpD6WGdhrvdcKA7lN8kP6Jj+VSlhHlrYXWzbfXfm6
-MxlTfJBcS0gEUgxX5x/G4GPaAOKyIEdm2mDob+qfZk76eFARonU6+0YJUmGlPLCg
-ejiW7QFXmOodeGKsVk+l1dHS9G1YzJtphw6L25pQXdCzb8J5HWQugRBPKakR+47F
-oQt8c/vlODl9oHgAYvqFi/cNLyNyH2PoPw5pZHAbinOFl/JTi5uu3CbDwncrxMAz
-fEeVbjM8FPZ2hcdAbcvYy2jg4V7Rk1ey+dMx8Ai7BVUhMFi4BjGbHFGYBxXIFCjU
-pwIDAQAB
------END PUBLIC KEY-----`;
+`MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCpu2TooWqyt6LiWTzwrdyih3Ypzl7h+VRpxgUbfKaysyLwd+kqz/O3r14uw75QhOyA7bkn8OwmmrWwk9J0YZE22CYYEnoghMqoRAQVD5C08272xJ1Ny0pG2JDZ4EJfzb717OKyUFT9aFVQZY/GLij7dnelErLFOPeyDs7M4njQmQIDAQAB`;
 
 const privateKey = 
-`-----BEGIN PRIVATE KEY-----
-MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDeMhKxg0EdKdyB
-m3/lqiZkEmDogqLMUhN7gUhHWR5ggkKkPpYZ2Gu91woDuU3yQ/omP5VKWEeWthdb
-Nt9d+bozGVN8kFxLSARSDFfnH8bgY9oA4rIgR2baYOhv6p9mTvp4UBGidTr7RglS
-YaU8sKB6OJbtAVeY6h14YqxWT6XV0dL0bVjMm2mHDovbmlBd0LNvwnkdZC6BEE8p
-qRH7jsWhC3xz++U4OX2geABi+oWL9w0vI3IfY+g/DmlkcBuKc4WX8lOLm67cJsPC
-dyvEwDN8R5VuMzwU9naFx0Bty9jLaODhXtGTV7L50zHwCLsFVSEwWLgGMZscUZgH
-FcgUKNSnAgMBAAECggEAM+dEgJzlf/eAX/JADRkTALteUdH6T3o4vNf1V11VADxN
-buqDy6PHf0AVQctujtIcRAUETaqThnwgtpj50oz8VuVqoCVkud0nzTa+7el5Xn9U
-tHJAI9QqDYcnpMUM2SxHzAUAKY/y6DFzCgBvRd8IjaRcdR6kJL9DhRSfp0XRukFq
-50Fa+DRU5/DY3sb4MYFsktvV+9pvS44lkoToLGalVVAOqzl4LCQt18nOVY6zFtyg
-whAjQL4sYfuxCXpcLQGh8vEQh600FR6qi6gYEtbfK1r2fjlwz897OpEcNN6jvB7/
-k9LRTQoTLuJ9L4Q0xlQnq/+24GKJb4oovTqQXnOgEQKBgQD2RQknnzzGVwdyEozz
-zPBEpCrrey/ueYrxa7ReId559voBtjxMQF9ZRu9j/0Z2AAR01D9bm9h/H7oTq4+u
-cH7ehQxHbNp+jmFqYtoI7/yjA5onqE1iwsrIKFp7yQNjignKleYkxNNxOsm/PKDr
-eq7kkF/JkCblpSM43EPJwwFF2QKBgQDm+YiCSYZZzluIwpVYz+z9Zbr07oitj1TJ
-POLQn8QZXVtol8loJVjpxb+xFeCyuqhOB7MnTg9Uc32wQNaQ3TDAv99q31TzMgy5
-mrMHqJ5GEhFhPrd+kMHDGYKpSVlDF8EeG2e7vfSTd99sjASo9F5Dtmg4QSSDodRZ
-/l4diX3efwKBgCFCc5kRTXDwAgZq8PRgQjbTASTqby/C5Hv0ctiftF8+dsdSaFRY
-AUiaZuxXZpm7KN7qZ2Ak7RlGHKhZbD8/3DKLP3xJ/DxJWGi4zv+UAce2TdR7S3BC
-JIbhxE6heD6yPt5IXluq5W+OY/7a3lTPLd2ajgU33bj4E4izXshZ+MsJAoGBALyQ
-FOjAm6UvebzRlllWDlTku1eAcSa4L/DF+yl0dQR8Gcbuu+eBLfBTl2Y7xSBEkGh7
-kr/Q02UPkBnXJRRI76c8PWojf1e3kXnpGKV0/BmaYIPyTp1OElFzvx7zGaNTfj5V
-Az/bGRNXNpiISrmgHmDLRpQ+Yk/wSstZhX45o/+DAoGAX7//PZ1XlUIt+b5zzY2r
-1QbWenJpL7Z9SNMWQrR8clHYv3+havhh+jG3raGcRDjA4B5TIjHp5dSD7rW5Bhoq
-kW08WgbX4Lln1qxqg8do6rNXBHMeEvtWSxKQMEa6VIcPGXTKWGV4qMIjeMsB0F7i
-lUBHuh9WuiyIs9E2Z1OuAa0=
------END PRIVATE KEY-----`
+`MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAKm7ZOiharK3ouJZPPCt3KKHdinOXuH5VGnGBRt8prKzIvB36SrP87evXi7DvlCE7IDtuSfw7CaatbCT0nRhkTbYJhgSeiCEyqhEBBUPkLTzbvbEnU3LSkbYkNngQl/NvvXs4rJQVP1oVVBlj8YuKPt2d6USssU497IOzszieNCZAgMBAAECgYA9sMrAcsrhIjWlp2Gq6MZknG+qSkPaRlEUENESaH/+O3XbiPnKgcLHZIoK3UJy6Z08TysZBUwPy/N1toSroDqy6KNJ9MKmXrfloJapdMHVTe8Zzflafbkpy9xc3LQLmH8QK+AKQn2xFnIS3nlLPsG183F59dWfdhFg6uOqQ2TeAQJBANw4XsoWaFGk1ApKG2XV8jb6Pzqd16kfDrq3lu1Kxs88K5JFyJDJiwiMQa7afW4h4TqRQntLRIWl9BEhO35nu9ECQQDFTxDv3lVwbQPlKfCZOrePvjAnpd4BSTARDsZw9Vvmn5YBMYDe4mAPMJqjJXebkA7fWcCzshMq5+n3RDB16qJJAkEAoeLqg6KfQ01o9rttkpoJObMSohOAgvmqyUXGtF+g8Jzp5thXzV/rTfhVHKXPSROsz3ITLjGxiJHrbmBArPay0QJACGot070MscXEc8KNI0vQxk2bKiW1ySJA7YlOx0R/jd9ie1yMHXVUGXG+NpUDe9vx9m6SfFds39iSLtx2oKDIGQJAH7toWYooI4RvOvYBa6vHXJfAZApxrMvf0Gwh3g+RC2QElOdB7/QU0MIlTWsRJ54oFCuoMPuo04Qyq6BBMVQzWQ==`
 
-let symmetricKeys = [];
+const updateSymmetricKeys = (newSymmetricKeys) => {
+    symmetricKeys.push(newSymmetricKeys);
+};
 
+let symmetricKeys = [
+    {
+        groupId: "815aaf9a-cf9a-4eae-ac45-c3d8505132b2",
+        key: "asodhalsdhja;lskdjsa;dlwasd",
+    }
+];
 
-
-module.exports = { userPrivateKey: privateKey, userPublicKey: publicKey, userSymmetricKeys: symmetricKeys };
+module.exports = { privateKey, publicKey, symmetricKeys, updateSymmetricKeys };

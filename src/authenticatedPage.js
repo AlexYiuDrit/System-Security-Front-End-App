@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './authenticatedPage.css';
+import axios from 'axios';
 
 const AuthenticatedPage = () => {
     const navigate = useNavigate();
@@ -8,7 +9,7 @@ const AuthenticatedPage = () => {
     const [groupName, setGroupName] = useState('');
     const [members, setMembers] = useState([]);
     const [error, setError] = useState('');
-
+    const serverUrl = 'http://localhost:4000';
     const userData = JSON.parse(sessionStorage.getItem('userData'));
 
     const handleLogout = () => {
@@ -22,13 +23,13 @@ const AuthenticatedPage = () => {
         setError('');
     };
 
-    const handleCreateGroup = () => {
+    const handleCreateGroup = async () => {
         if (!groupName || members.length === 0) {
             setError('Missing group name or member not selected');
             return;
         }
         // Send request to server to create new group with groupName and members
-        
+        exchangeKeys(members);
 
         setIsModalOpen(false);
         setGroupName('');
@@ -64,6 +65,20 @@ const AuthenticatedPage = () => {
         const newMembers = members.filter(m => m !== member);
         setMembers(newMembers);
     };
+
+    const exchangeKeys = async (members) => {
+        let key = "asodhalsdhja;lskdjsa;dlwasd";
+        let user = {
+            name: userData.data.userName,
+            id: userData.data.id,
+            encryptedKey: key,
+        }
+        for (let i = 0; i < members.length; i++) {
+            members[i].encryptedKey = key;
+        }
+        let result = await axios.post(`${serverUrl}/chat/distributeSymmetricKeyAndCreateGroup`,{ groupName, user, members });
+        console.log(result);
+    }
 
     return (
         <div>

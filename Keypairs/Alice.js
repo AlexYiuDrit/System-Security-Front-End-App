@@ -1,46 +1,17 @@
 const publicKey = 
-`-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyJmP8l/aCCQnaLTPwSmO
-OZEGS82TrZlmuJLOi2C+4vT+Aagmvwd4DRK6pL7jCzIyS/Ppe7E0GMfluGDRVPAz
-FYKcw73LhvAnwj4MhfVzVNxvfYEqCtb4No1yvWjaA3COBoQGbJCopwiCYvkNwFSq
-c7H5JqCi9lWaRCWt33jw+1zqzhQ5sK9nAbnG0k0y0OPjJZoK6bh2bxnzKGO4iXdr
-DCepMn3bmO363bF6qUOssg63q+GJfJO+DO8RE0kGE7HtAslSEqG6as5bPswkFjsD
-boP1srD4U2PR91PUlxWa45qEyBJulw8L0ziH22+rEdTctbbdw7i/TotjZElXewYH
-4wIDAQAB
------END PUBLIC KEY-----`;
+`MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJjQ4hjcfkaNY+oUYVoRKnNbIcOpbxvkQSBcLLB/U0wf1F2//3+1zwtqdrbOemRZt5ipg9TNnh+J9vJ6LnmBPY8CAwEAAQ==`;
 
 const privateKey = 
-`-----BEGIN PRIVATE KEY-----
-MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDImY/yX9oIJCdo
-tM/BKY45kQZLzZOtmWa4ks6LYL7i9P4BqCa/B3gNErqkvuMLMjJL8+l7sTQYx+W4
-YNFU8DMVgpzDvcuG8CfCPgyF9XNU3G99gSoK1vg2jXK9aNoDcI4GhAZskKinCIJi
-+Q3AVKpzsfkmoKL2VZpEJa3fePD7XOrOFDmwr2cBucbSTTLQ4+MlmgrpuHZvGfMo
-Y7iJd2sMJ6kyfduY7frdsXqpQ6yyDrer4Yl8k74M7xETSQYTse0CyVISobpqzls+
-zCQWOwNug/WysPhTY9H3U9SXFZrjmoTIEm6XDwvTOIfbb6sR1Ny1tt3DuL9Oi2Nk
-SVd7BgfjAgMBAAECggEAZtIPbnSjFTky2gCT3LaoJ+mmCIS/BWRzunfFVruoHDzn
-VYITGieB6XGIKZmOVtbL4RKMwtH5mhocLX2yzo6wIH5qTAqkn+3I809Kq/87tmum
-2fWyzwuQ/qVSArQTy1+N7NkPUeZ0C+nYq1JtMgAzvkmjI6GC5jDKedO2Y61iF/SH
-GkIaYzc5sNxL6paxgclnBZOVsf1Cp5qCp9vkiaVqxPp+CqxrO/uNuNtW4qL6wYxV
-IdNbaS7J32btRmVXwWglv/jxMkSsTvB0Y6lOK1cpHlCzdg0wxTPtCn8N+mnWjlF/
-ua4ODv5mVAVMysH1c560ja6R/XNRKUYwE9+y/FJTAQKBgQD54K7BHwEtBj4TWCt7
-9r8MCMEE/CeSLqahCjKsA41YHmyAfr9wRpbAlMersQiD5LKngDVLTMmGnaHPWchB
-sHiIqks3HTgZO5TvdueI+FN1QDus9CzBbbC0Lw26czhPTtBSxstgDBBZScZtgZ3k
-jT4VrnQEHAVjLXILpRyRzJJbcwKBgQDNg8ribZNstMbl2B9tYiONxvyKu31YyIzZ
-Q3QUOUOZxOd1eyXVxEwOyCSkvCobyB+YFHDSPZzVeYnC33cmAU/lKvXV29KgHtlP
-052/mb+mKPbhO18n0fi5Mu9IGRMfIpkxXwAngDsTNkJcEp6fZUgBxFtM6a/00P5S
-+cQKLXdl0QKBgQDgHGdAKGmqky27tdmSXjTtOzC7Itju4E5sozPdWXY88VSJTqSu
-s3DkGsyWrbogaU7esjuaZK1ewiRtT24vlHIWyP2a2ecFoo2q1K9HBsn7oHelYH5/
-obzZblZWwp5fayWnCEtBwrArFOMWNimB4jgrxAKj6OngENN3pEficGNYBwKBgQCG
-ATKQdByV3EZ45nSPkVdXgfF30IsKEjLtE/OjoDc5E9BMpVDlU0q4tL5YAC2A0fvv
-4RwzqmMSO16dh7KcQGzFJD8KBH0RVSwjxfttTKZPhRR9hoYkY+BHejPWEiuKuLel
-HqnuF8ntXArnGGj/zD2okU1rGFFYU9IRbrTqYf0hkQKBgAlctf159U+TB0YZb9la
-I1P3uEzuSrXz2P3SfQCm0k35LKbF4sLFq7KeznusRCLSwNrYg4b0Pr1vcE5IJilE
-oGuJZvC9XNuL5rc2fSe5dMvhB+oEYESiobXAtVs/cGJiMJu+DV14ZYtBexpPS4eM
-TbtCv/OFMXKaBsDf6TQ2d05K
------END PRIVATE KEY-----`
-
-let symmetricKeys = [];
+`MIIBUwIBADANBgkqhkiG9w0BAQEFAASCAT0wggE5AgEAAkEAmNDiGNx+Ro1j6hRhWhEqc1shw6lvG+RBIFwssH9TTB/UXb//f7XPC2p2ts56ZFm3mKmD1M2eH4n28noueYE9jwIDAQABAkArv5Ea4PTdqdiyyMbeDBAFGk/ePgFrELt8UicRGEJ2hizqo+7ytegGFc69gIf7qll7/hXg3OaJp/NCjtK4iObRAiEAzM59LHKm9Hia344435lOxq6Dx9ExYxzMhXFS9g9lCmMCIQC/A4dabIgCAal0yJdGvV3GgKc5NDqgDhXuBKiitvYx5QIgcZYX0B3qQG3fHxtmqYQCL6i8B4cax+hB+cRHCZayKBcCIHnfr4HjU5gsJUnNHrBU7LtVpNyb1Xf/5MAcGtjO8iB9AiAWEf9MNFfo/znHRFo/6hxVVg1bOdf/OnetoppSHFcUVw==`
 
 
+const updateSymmetricKeys = (newSymmetricKeys) => {
+    symmetricKeys = newSymmetricKeys;
+};
 
-module.exports = { userPrivateKey: privateKey, userPublicKey: publicKey, userSymmetricKeys: symmetricKeys };
+let symmetricKeys = [{
+    groupId: "815aaf9a-cf9a-4eae-ac45-c3d8505132b2",
+    key: "asodhalsdhja;lskdjsa;dlwasd",
+}];
+
+module.exports = { privateKey, publicKey, symmetricKeys, updateSymmetricKeys };

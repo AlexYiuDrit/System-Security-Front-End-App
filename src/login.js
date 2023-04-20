@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './login.css';
 import sha256 from 'js-sha256';
-const fs = require('fs');
-const func = require('../function.js');
 
 const serverUrl = 'http://localhost:4000';
 
@@ -43,7 +41,6 @@ const LoginPage = ({ onLoginSuccess }) => {
             let response = await axios.get(`${serverUrl}/login/getUserData?email=${email}`);
             let userGroups = handleSymmetricKeys(response.data.data.userName, response.data.data.groups);
             response.data.data.groups = userGroups;
-            await response.save();
             sessionStorage.setItem('userData', JSON.stringify(response.data));
         } catch (error) {
             console.error('Error fetching user data:', error);
@@ -51,20 +48,21 @@ const LoginPage = ({ onLoginSuccess }) => {
         navigate('/authenticatedPage'); // Navigate to /authenticatedPage after successful login
     };
 
+    function decrypt(key, encrypted) {
+        return "asodhalsdhja;lskdjsa;dlwasd";
+    } 
+    
     const handleSymmetricKeys = async (userName, groups) => {
         try {
-            let { userPrivateKey } = require(`../Keypairs/${userName}.js`);
-            let userKeyPair = require(`../Keypairs/${userName}.js`);
+            let { privateKey, symmetricKeys, updateSymmetricKeys } = require(`../Keypairs/${userName}.js`);
             for (let i = 0; i < groups.length; i++) {
                 if (!groups[i].handled) {
-                    let symmetricKey = func.privateKeyDecrypt(groups[i].SymmetricKey, userPrivateKey);
-                    // userSymmetricKeys.push({ groupId: groups[i].groupid, AES: symmetricKey });
-                    userKeyPair.userSymmetricKeys.push({ groupId: groups[i].groupid, AES: symmetricKey });
+                    const decrypted = decrypt(privateKey, groups[i].SymmetricKey);
+                    symmetricKeys.push({ groupId: groups[i].groupId, AES: decrypted });
                     groups[i].handled = true;
                 }
             }
-            const keyPairFilePath = path.join(__dirname, `../Keypairs/${userName}.js`);
-            fs.writeFileSync(keyPairFilePath, `module.exports = ${JSON.stringify(userKeyPair, null, 2)};`);
+            updateSymmetricKeys(symmetricKeys);
             return groups;
         } catch (error) {
             console.error('handling key error:', error);
@@ -79,11 +77,8 @@ const LoginPage = ({ onLoginSuccess }) => {
                 setEmailError('Invalid email format'); // Set email validation error message
                 return;
             }
-
-            // Make axios call to server to check if email is valid
             try {
                 let response = await axios.post(`${serverUrl}/login/checkEmail`, { email });
-                // let response = { status: 200, data: { status: 'ok', data: { salt: '012', userName: 'Alex' } } };
                 if (response.status === 200 && response.data.status === 'ok') {
                     // If email is valid, move to stage 2
                     setSalt(response.data.data.salt);
@@ -100,7 +95,6 @@ const LoginPage = ({ onLoginSuccess }) => {
             try {
                 let pwd = sha256(salt + password);
                 let response = await axios.post(`${serverUrl}/login/checkPassword`, { email , password: pwd });
-                // let response = { status: 200, data: { status: 'ok', data: { salt: '012', userName: 'Alex' } } };
                 console.log(response);
                 if (response.status === 200 && response.data.status === 'ok') {
                     setPasswordError(null);
